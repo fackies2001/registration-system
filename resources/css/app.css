@@ -42,14 +42,15 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: var(--gradient);
+    background: url('/storage/asean-bg.png') no-repeat center center;
+    background-size: cover;
     padding: 2rem 1rem;
     position: relative;
     overflow: hidden;
 }
 
 /* Background floating shapes */
-.auth-page::before, .auth-page::after {
+/* .auth-page::before, .auth-page::after {
     content: '';
     position: absolute;
     width: 300px;
@@ -71,7 +72,7 @@ body {
     width: 400px;
     height: 400px;
     animation: pulse 12s infinite alternate-reverse;
-}
+} */
 
 .auth-card {
     background: rgba(255, 255, 255, 0.95);
@@ -79,10 +80,75 @@ body {
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
     width: 100%;
-    max-width: 600px;
+    max-width: 800px;
     padding: 2.5rem;
     z-index: 1;
     animation: slideUp 0.5s ease-out;
+}
+
+/* Multi-Step Wizard Styles */
+.step-indicator {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.step-indicator::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--border);
+    z-index: 0;
+    transform: translateY(-50%);
+}
+
+.step-item {
+    position: relative;
+    z-index: 1;
+    background: var(--surface);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: var(--text-muted);
+    border: 2px solid var(--border);
+    transition: all 0.3s ease;
+}
+
+.step-item.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+.step-item.completed {
+    background: var(--success);
+    color: white;
+    border-color: var(--success);
+}
+
+.step-content {
+    display: none;
+}
+
+.step-content.active {
+    display: block;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
 }
 
 .auth-header {

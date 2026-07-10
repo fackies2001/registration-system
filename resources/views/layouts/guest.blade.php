@@ -9,7 +9,7 @@
     @yield('head')
 </head>
 <body>
-    <div class="auth-page">
+    <div class="auth-page" style="background: url('{{ asset('storage/asean-bg.png') }}') no-repeat center center fixed; background-size: cover;">
         <div class="auth-card">
             @yield('content')
         </div>

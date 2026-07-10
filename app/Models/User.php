@@ -16,7 +16,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\URL;
 use Spatie\Permission\Traits\HasRoles;
 
-#[Fillable(['full_name', 'email', 'organization', 'designation', 'country', 'address', 'contact_number'])]
+#[Fillable(['salutation', 'first_name', 'middle_name', 'last_name', 'suffix', 'sex', 'nationality', 'place_of_birth', 'date_of_birth', 'participant_type', 'ministry_agency', 'office_subunit', 'email', 'organization', 'designation', 'address', 'contact_number'])]
 #[Hidden(['remember_token'])]
 class User extends Authenticatable implements MustVerifyEmail
 {

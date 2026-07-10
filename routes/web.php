@@ -9,6 +9,10 @@ use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', function () {
+    return redirect()->route('register');
+});
+
 // -------------------------------------------------------------------------
 // Public / Guest Routes
 // -------------------------------------------------------------------------
