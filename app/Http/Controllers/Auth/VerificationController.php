@@ -46,6 +46,8 @@ class VerificationController extends Controller
                 'account_status' => AccountStatus::PENDING_APPROVAL,
             ]);
 
+            $user->notify(new \App\Notifications\PendingRegistrationNotification());
+
             event(new UserEmailVerified($user));
         }
 

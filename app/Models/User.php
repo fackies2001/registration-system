@@ -16,7 +16,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\URL;
 use Spatie\Permission\Traits\HasRoles;
 
-#[Fillable(['salutation', 'first_name', 'middle_name', 'last_name', 'suffix', 'sex', 'nationality', 'place_of_birth', 'date_of_birth', 'participant_type', 'ministry_agency', 'office_subunit', 'email', 'organization', 'designation', 'address', 'contact_number'])]
+#[Fillable(['salutation', 'first_name', 'middle_name', 'last_name', 'suffix', 'sex', 'nationality', 'place_of_birth', 'date_of_birth', 'participant_type', 'ministry_agency', 'office_subunit', 'email', 'organization', 'designation', 'address', 'contact_number', 'meeting_link', 'approval_note'])]
 #[Hidden(['remember_token'])]
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -35,6 +35,20 @@ class User extends Authenticatable implements MustVerifyEmail
             'account_status' => AccountStatus::class,
             'approved_at' => 'datetime',
         ];
+    }
+
+    // -------------------------------------------------------------------------
+    // Accessors
+    // -------------------------------------------------------------------------
+
+    public function getFullNameAttribute(): string
+    {
+        return trim(implode(' ', array_filter([
+            $this->first_name,
+            $this->middle_name,
+            $this->last_name,
+            $this->suffix,
+        ])));
     }
 
     // -------------------------------------------------------------------------

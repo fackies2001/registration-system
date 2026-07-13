@@ -67,15 +67,22 @@ class UserApprovalController extends Controller
      * Transitions the user to active, generates a certificate token,
      * and sends both the certificate and a magic login link.
      */
-    public function approve(User $user): RedirectResponse
+    public function approve(Request $request, User $user): RedirectResponse
     {
         $this->authorize('approve', $user);
+
+        $validated = $request->validate([
+            'meeting_link' => ['required', 'url', 'max:500'],
+            'approval_note' => ['nullable', 'string', 'max:2000'],
+        ]);
 
         $user->update([
             'account_status' => AccountStatus::ACTIVE,
             'approved_at' => now(),
             'approved_by' => auth()->id(),
             'approval_certificate_token' => Str::uuid()->toString(),
+            'meeting_link' => $validated['meeting_link'],
+            'approval_note' => $validated['approval_note'] ?? null,
         ]);
 
         // Send certificate notification

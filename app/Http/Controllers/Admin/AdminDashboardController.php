@@ -15,17 +15,17 @@ class AdminDashboardController extends Controller
     public function index(): View
     {
         $stats = [
-            'total_users' => User::count(),
-            'pending_approval' => User::pendingApproval()->count(),
-            'active' => User::active()->count(),
+            'total' => User::count(),
+            'pending' => User::pendingApproval()->count(),
+            'approved' => User::active()->count(),
             'rejected' => User::rejected()->count(),
         ];
 
-        $recentRegistrations = User::query()
+        $recentUsers = User::query()
             ->latest()
             ->take(10)
             ->get();
 
-        return view('admin.dashboard', compact('stats', 'recentRegistrations'));
+        return view('admin.dashboard', compact('stats', 'recentUsers'));
     }
 }

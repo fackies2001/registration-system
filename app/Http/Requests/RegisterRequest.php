@@ -84,7 +84,14 @@ class RegisterRequest extends FormRequest
                 return;
             }
 
-            $response = Http::asForm()->post('https://challenges.cloudflare.com/turnstile/v0/siteverify', [
+            $httpRequest = Http::asForm();
+            
+            // Disable SSL verification on local environment to prevent cURL 60 errors
+            if (app()->environment('local')) {
+                $httpRequest->withoutVerifying();
+            }
+
+            $response = $httpRequest->post('https://challenges.cloudflare.com/turnstile/v0/siteverify', [
                 'secret' => config('services.turnstile.secret_key'),
                 'response' => $this->input('cf-turnstile-response'),
                 'remoteip' => $this->ip(),

@@ -87,6 +87,14 @@
 
                     <form method="POST" action="{{ route('admin.users.approve', $user) }}" style="margin-bottom: 1rem;" onsubmit="return confirm('Are you sure you want to approve this user? They will receive an email with their certificate and login link.');">
                         @csrf
+                        <div class="form-group" style="margin-bottom: 1rem;">
+                            <label class="form-label">Meeting Link (Zoom / Google Meet) <span style="color: var(--danger);">*</span></label>
+                            <input type="url" name="meeting_link" class="form-input" placeholder="https://zoom.us/j/..." required>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 1rem;">
+                            <label class="form-label">Approval Note (Optional)</label>
+                            <textarea name="approval_note" class="form-textarea" placeholder="Any additional instructions or notes..."></textarea>
+                        </div>
                         <button type="submit" class="btn btn-primary btn-block" style="background-color: var(--success);">
                             ✅ Approve User Access
                         </button>
